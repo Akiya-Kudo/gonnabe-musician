@@ -1,0 +1,83 @@
+name: Documentation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'apps/docs-app/**'
+      - 'scripts/check-docs.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'AGENTS.md'
+      - '.node-version'
+      - '.github/workflows/docs-pages.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'apps/docs-app/**'
+      - 'scripts/check-docs.mjs'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'AGENTS.md'
+      - '.node-version'
+      - '.github/workflows/docs-pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      NEXT_TELEMETRY_DISABLED: 1
+      NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: .node-version
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Install dependencies
+        run: npm ci
+      - name: Check documentation metadata and links
+        run: npm run check:docs
+      - name: Check TypeScript
+        run: npm run typecheck
+      - name: Export static documentation
+        run: npm run build:docs
+      - name: Check required export files
+        run: |
+          test -s apps/docs-app/out/index.html
+          test -s apps/docs-app/out/product/vision/index.html
+          test -s apps/docs-app/out/operations/index.html
+          test -s apps/docs-app/out/search-index.json
+      - name: Upload Pages artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/docs-app/out
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+      - name: Deploy documentation
+        id: deployment
+        uses: actions/deploy-pages@v5
