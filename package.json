@@ -1,0 +1,22 @@
+{
+  "name": "gonnabe-musician",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": ["apps/*"],
+  "packageManager": "npm@11.9.0",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "dev:docs": "npm run dev --workspace @gonnabe-musician/docs-app",
+    "build:docs": "npm run build --workspace @gonnabe-musician/docs-app",
+    "typecheck": "npm run typecheck --workspace @gonnabe-musician/docs-app",
+    "check:docs": "node scripts/check-docs.mjs"
+  },
+  "devDependencies": {
+    "remark-parse": "^11.0.0",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.0.0",
+    "yaml": "^2.9.1"
+  }
+}
