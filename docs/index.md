@@ -27,6 +27,7 @@ description: gonnabe-musician の構想・設計・検証を育てるための�
 | [未決事項](./decisions/open-questions.md) | 次に判断・検証する事項 |
 | [ナレッジベースの育て方](./guide/knowledge-base.md) | 資料の置き場所、状態、更新と意思決定のルール |
 | [ドキュメントサイトの開発・公開](./engineering/docs-site.md) | Fumadocsの開発とVercelへの自動公開 |
+| [Vercel初回設定手順（オーナー向け）](./engineering/vercel-initial-setup.md) | GitHub接続、初回デプロイ、公開状態の確認 |
 | [初期提案の原文](./sources/initial-proposal.md) | 整理の元にしたテキスト全文 |
 
 ## この方針の核

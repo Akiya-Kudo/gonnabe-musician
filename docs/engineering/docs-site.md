@@ -58,11 +58,7 @@ NEXT_PUBLIC_BASE_PATH=/docs npm run build:docs
 
 ## Vercelの初回設定
 
-1. Vercelで **Add New → Project** から `Akiya-Kudo/gonnabe-musician` を取り込みます。
-2. **Root Directory** をリポジトリルート (`.`) にします。アプリの場所だけをルートにすると、アプリが参照する `../../docs` とルートのnpm lockfileをビルドから参照できません。
-3. Production Branchが `main` であることを確認します。Git連携を有効にすると、PRにプレビュー、本番ブランチへの更新にProductionデプロイが作られます。
-4. `vercel.json` の設定により、ルートの `npm ci`、ドキュメント検証・型検査・ビルドを行い、`apps/docs-app/out/` を公開します。Framework PresetはOther（自動検出を無効）にし、Install Command、Build Command、Output Directoryを `vercel.json` の値で管理します。
-5. VercelのDeploymentsで初回のProductionデプロイが成功し、割り当てられた公開URLでドキュメントが表示されることを確認します。
+画面操作を含むオーナー向けのチェックリストは[Vercel初回設定手順](./vercel-initial-setup.md)を参照してください。要点は、対象リポジトリを接続し、Root Directoryをリポジトリルート、Framework PresetをOther、Production Branchを `main` にすることです。ビルド・出力先は `vercel.json` が指定します。
 
 この方式ではVercelがGitHubから直接ソースを取得してデプロイするため、GitHub Actions SecretsへVercelトークンを登録しません。GitHub Actionsは検証とビルドを担当し、PRと `main` の両方で動きます。Vercel側のGit連携・アカウント・チームの権限設定はVercelで管理します。
 
