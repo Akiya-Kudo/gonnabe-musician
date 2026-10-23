@@ -14,7 +14,7 @@ description: docs/ をFumadocsで表示し、GitHub Actionsで検証してVercel
 | `apps/docs-app/lib/source.ts` | `../../docs` を読み込むFumadocsコレクション |
 | `scripts/check-docs.mjs` | タイトル・説明、相対リンク先、ナビゲーションJSONの基本検証 |
 | `.github/workflows/docs-ci.yml` | PRと `main` 更新時のメタデータ検証・型検査・静的ビルド |
-| `vercel.json` | リポジトリルートからのインストール・検証・ビルドと静的成果物の指定 |
+| `apps/docs-app/vercel.json` | docs appをRoot Directoryとしてインストール・検証・ビルドと静的成果物を指定 |
 | `package-lock.json` | npm workspaces全体の依存バージョン固定 |
 
 FumadocsはMarkdownからページ・目次・サイドバーを生成します。相対的な `.md` リンクは表示用URLへ変換されます。検索用インデックスもビルド時に生成し、ブラウザで検索します。サイトは静的に書き出すため、アプリ用のAPIサーバーは必要ありません。
@@ -58,15 +58,15 @@ NEXT_PUBLIC_BASE_PATH=/docs npm run build:docs
 
 ## Vercelの初回設定
 
-画面操作を含むオーナー向けのチェックリストは[Vercel初回設定手順](./vercel-initial-setup.md)を参照してください。要点は、対象リポジトリを接続し、Root Directoryをリポジトリルート、Framework PresetをOther、Production Branchを `main` にすることです。ビルド・出力先は `vercel.json` が指定します。
+画面操作を含むオーナー向けのチェックリストは[Vercel初回設定手順](./vercel-initial-setup.md)を参照してください。要点は、対象リポジトリを接続し、Root Directoryを `apps/docs-app`、Root Directory外のファイルをビルドに含める設定を有効化、Framework PresetをOther、Production Branchを `main` にすることです。ビルド・出力先は `apps/docs-app/vercel.json` が指定します。
 
 この方式ではVercelがGitHubから直接ソースを取得してデプロイするため、GitHub Actions SecretsへVercelトークンを登録しません。GitHub Actionsは検証とビルドを担当し、PRと `main` の両方で動きます。Vercel側のGit連携・アカウント・チームの権限設定はVercelで管理します。
 
-`vercel.json` はVercelプロジェクトの作成・Git接続までは行いません。初回プロジェクトの取り込み後、PRプレビューと `main` のProductionデプロイを実際のVercel Deploymentsで確認します。公開先URLはVercelが割り当てた値を使います。
+`apps/docs-app/vercel.json` はVercelプロジェクトの作成・Git接続までは行いません。初回プロジェクトの取り込み後、PRプレビューと `main` のProductionデプロイを実際のVercel Deploymentsで確認します。公開先URLはVercelが割り当てた値を使います。
 
 ## 自動実行の条件
 
-- `main` へのpushで、`docs/**`、`apps/docs-app/**`、検証スクリプト、ルートのnpm設定・ロックファイル、エージェント向けの `AGENTS.md`、Node.jsバージョン、CIワークフロー、`vercel.json` が変わった場合：検証とビルド。VercelのGit連携がProductionデプロイを作成。
+- `main` へのpushで、`docs/**`、`apps/docs-app/**`、検証スクリプト、ルートのnpm設定・ロックファイル、エージェント向けの `AGENTS.md`、Node.jsバージョン、CIワークフローが変わった場合：検証とビルド。VercelのGit連携がProductionデプロイを作成。
 - `main` 向けPRで同じ範囲が変わった場合：検証とビルド。VercelのGit連携がPreviewデプロイを作成。
 - 手動実行：GitHub Actionsで検証とビルド。公開はVercelのGit連携によるブランチ更新で行う。
 
