@@ -26,7 +26,7 @@ description: gonnabe-musician の構想・設計・検証を育てるための�
 | [出典と根拠の扱い](./research/references.md) | 原文にある研究・競合・技術・権利・料金の参照先と留保 |
 | [未決事項](./decisions/open-questions.md) | 次に判断・検証する事項 |
 | [ナレッジベースの育て方](./guide/knowledge-base.md) | 資料の置き場所、状態、更新と意思決定のルール |
-| [ドキュメントサイトの開発・公開](./engineering/docs-site.md) | Fumadocsの開発とGitHub Pagesへの自動公開 |
+| [ドキュメントサイトの開発・公開](./engineering/docs-site.md) | Fumadocsの開発とVercelへの自動公開 |
 | [初期提案の原文](./sources/initial-proposal.md) | 整理の元にしたテキスト全文 |
 
 ## この方針の核

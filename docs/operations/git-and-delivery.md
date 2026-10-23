@@ -52,7 +52,7 @@ CIが失敗・キャンセル・保留・未実行である状態を成功と扱
 
 ## 現在のサイトの公開手順
 
-ワークフローは `.github/workflows/docs-pages.yml` です。PRでは検証し、`main` の資料・サイト関連ファイル更新ではGitHub Pagesへ公開します。具体的な起動コマンドや初回Pages設定は[ドキュメントサイトの開発・公開](../engineering/docs-site.md)を参照してください。
+`.github/workflows/docs-ci.yml` がPRと `main` の資料・サイト関連ファイルを検証・ビルドします。VercelのGitHub連携がPRプレビューと `main` の本番公開を行います。初回のVercel接続と設定は[ドキュメントサイトの開発・公開](../engineering/docs-site.md)を参照してください。
 
 ## 不具合が起きたとき
 
