@@ -12,7 +12,6 @@ on:
       - 'AGENTS.md'
       - '.node-version'
       - '.github/workflows/docs-ci.yml'
-      - 'vercel.json'
   pull_request:
     branches: [main]
     paths:
@@ -24,7 +23,6 @@ on:
       - 'AGENTS.md'
       - '.node-version'
       - '.github/workflows/docs-ci.yml'
-      - 'vercel.json'
   workflow_dispatch:
 
 permissions:

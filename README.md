@@ -27,6 +27,6 @@ npm run build:docs
 
 静的サイトを `apps/docs-app/out/` に出力します。`.github/workflows/docs-ci.yml` がPRと `main` の更新を検証・ビルドし、VercelのGitHub連携がPRプレビューと `main` の本番デプロイを行います。
 
-初回はVercelでリポジトリをプロジェクトとして取り込み、Root Directoryをリポジトリルートに設定してください。設定と公開手順は [ドキュメントサイトの開発・公開](docs/engineering/docs-site.md) を参照してください。
+初回はVercelでリポジトリをプロジェクトとして取り込み、Root Directoryを `apps/docs-app` に設定してください。設定と公開手順は [ドキュメントサイトの開発・公開](docs/engineering/docs-site.md) を参照してください。
 
 資料の追加・更新ルールは [ナレッジベースの育て方](docs/guide/knowledge-base.md) にまとめています。
