@@ -25,8 +25,8 @@ npm run typecheck
 npm run build:docs
 ```
 
-静的サイトを `apps/docs-app/out/` に出力します。`.github/workflows/docs-pages.yml` により、`main` の `docs/` やサイト設定の更新を検証し、GitHub Pagesへデプロイします。PRでは検証とビルドを行います。
+静的サイトを `apps/docs-app/out/` に出力します。`.github/workflows/docs-ci.yml` がPRと `main` の更新を検証・ビルドし、VercelのGitHub連携がPRプレビューと `main` の本番デプロイを行います。
 
-初回はGitHubの **Settings → Pages → Source** で **GitHub Actions** を選んでください。ベースパス、公開条件、詳細な手順は [ドキュメントサイトの開発・公開](docs/engineering/docs-site.md) を参照してください。
+初回はVercelでリポジトリをプロジェクトとして取り込み、Root Directoryをリポジトリルートに設定してください。設定と公開手順は [ドキュメントサイトの開発・公開](docs/engineering/docs-site.md) を参照してください。
 
 資料の追加・更新ルールは [ナレッジベースの育て方](docs/guide/knowledge-base.md) にまとめています。
